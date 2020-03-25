@@ -1,3 +1,3 @@
-output "ip" {
-  value = "${google_compute_instance.appserver.network_interface.0.access_config.0.nat_ip}"
+output "lb-ip-address" {
+  value = google_compute_global_address.external-address.address
 }
