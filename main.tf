@@ -31,7 +31,6 @@ resource "google_compute_backend_service" "backend-service" {
   port_name             = "http-port"
   timeout_sec           = 10
   load_balancing_scheme = "EXTERNAL"
-  locality_lb_policy    = "ROUND_ROBIN"
   session_affinity      = "NONE"
   backend {
     group = google_compute_instance_group_manager.instance-group.instance_group
@@ -80,10 +79,10 @@ resource "google_compute_autoscaler" "autoscaler" {
 
   autoscaling_policy {
     max_replicas    = 10
-    min_replicas    = 1
+    min_replicas    = 3
     cooldown_period = 60
     cpu_utilization {
-      target = 0.7
+      target = 0.5
     }
   }
 }
